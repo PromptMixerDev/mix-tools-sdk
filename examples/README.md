@@ -10,12 +10,22 @@ Demonstrates fundamental SDK operations:
 - Listing tools in different formats
 - Basic tool execution
 
-### 2. Anthropic Integration (`anthropic_example.py`)
+### 2. Anthropic Integration
+We provide two examples for Anthropic integration:
+
+#### Direct API (`anthropic_example.py`)
 Shows how to:
 - Get tools formatted for Anthropic's Claude
 - Pass tools to Claude API
 - Handle tool responses correctly
 - Execute tools with automatic result formatting
+
+#### AWS Bedrock (`anthropic_bedrock_example.py`)
+Demonstrates:
+- Using Claude through AWS Bedrock
+- Configuring AWS credentials
+- Tool integration with Bedrock's Claude models
+- Handling Bedrock-specific response formats
 
 ### 3. OpenAI Integration (`openai_example.py`)
 Demonstrates:
@@ -49,7 +59,8 @@ The SDK requires an API key for authentication. There are two ways to provide it
 Make sure you have the necessary API keys set up:
 - `MIXTOOLS_API_KEY` for Mix Tools API authentication
 - `OPENAI_API_KEY` for OpenAI examples
-- `ANTHROPIC_API_KEY` for Anthropic examples
+- `ANTHROPIC_API_KEY` for Anthropic direct API examples
+- AWS credentials configured for Bedrock examples
 
 ## Key Concepts
 
@@ -164,6 +175,7 @@ Each example can be run directly:
 ```bash
 python examples/basic_usage.py
 python examples/anthropic_example.py
+python examples/anthropic_bedrock_example.py
 python examples/openai_example.py
 ```
 

@@ -1,12 +1,13 @@
 [tool.poetry]
 name = "mix-tools-sdk"
-version = "0.1.0"
+version = "0.1.1"
 description = "SDK for Mix Tools API"
-authors = ["Your Name <your.email@example.com>"]
+authors = ["Ivan Iufriakov i@box.mix.tools"]
+license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.8"
-httpx = "^0.24.0"
+httpx = "^0.28.0"
 pydantic = "^2.0.0"
 
 [tool.poetry.group.dev.dependencies]

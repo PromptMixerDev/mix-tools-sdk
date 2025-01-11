@@ -2,6 +2,8 @@
 
 A Python SDK for interacting with the Mix Tools API. This SDK provides a simple interface to list and execute tools in various formats including OpenAI, Anthropic, and Ollama.
 
+Visit [mix.tools](https://mix.tools) for the main website and [api.mix.tools](https://api.mix.tools) for API documentation.
+
 ## Installation
 
 ```bash
@@ -35,7 +37,7 @@ logger = logging.getLogger(__name__)
 
 async def main():
     # Initialize client with custom base URL (optional)
-    async with MixToolsClient(base_url="http://localhost:8000") as client:
+    async with MixToolsClient() as client:
         # Check API health
         health = await client.health_check()
         logger.info("API health status: %s", health["status"])

@@ -3,4 +3,13 @@
 __pycache__/
 **/__pycache__/
 *.py[cod]
-*$py.class
+.venv/
+venv/
+.idea/
+.vscode/
+
+# Python package builds
+dist/
+build/
+*.egg-info/
+*.egg
