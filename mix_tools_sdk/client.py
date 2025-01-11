@@ -1,5 +1,5 @@
 import os
-from typing import Dict, Any, Optional, Literal
+from typing import Dict, Any, Optional, Literal, List, Union
 import httpx
 
 ToolFormat = Literal["default", "openai", "anthropic", "ollama"]
@@ -32,17 +32,32 @@ class MixToolsClient:
         """Close the HTTP client"""
         await self.client.aclose()
 
-    async def list_tools(self, format: Optional[ToolFormat] = None) -> Dict[str, Any]:
+    async def list_tools(
+        self,
+        format: Optional[ToolFormat] = None,
+        tags: Optional[Union[str, List[str]]] = None,
+        toolkit: Optional[str] = None
+    ) -> Dict[str, Any]:
         """
-        List all available tools
+        List available tools with optional filtering
 
         Args:
             format: Optional format to return tools in (default, openai, anthropic, ollama)
+            tags: Optional tag or list of tags to filter tools by. Tools must have all specified tags.
+            toolkit: Optional toolkit name to filter tools by
 
         Returns:
             Dict containing list of tools in specified format
         """
-        params = {"format": format} if format else None
+        params = {}
+        if format:
+            params["format"] = format
+        if tags:
+            # Convert single tag to list for consistent handling
+            tag_list = [tags] if isinstance(tags, str) else tags
+            params["tags"] = ",".join(tag_list)
+        if toolkit:
+            params["toolkit"] = toolkit
         response = await self.client.get(f"{self.base_url}/tools", params=params)
         response.raise_for_status()
         return response.json()

@@ -13,3 +13,9 @@ dist/
 build/
 *.egg-info/
 *.egg
+*.pyc
+
+# Coverage and test files
+.coverage
+.pytest_cache/
+htmlcov/

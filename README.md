@@ -42,9 +42,25 @@ async def main():
         health = await client.health_check()
         logger.info("API health status: %s", health["status"])
 
-        # List tools in OpenAI format
-        tools = await client.list_tools(format="openai")
-        logger.info("Available tools: %s", tools)
+        # List tools with various filters
+        # Get all search-related tools
+        search_tools = await client.list_tools(tags="search")
+        logger.info("Search tools: %s", search_tools)
+
+        # Get academic search tools
+        academic_tools = await client.list_tools(tags=["search", "academic"])
+        logger.info("Academic search tools: %s", academic_tools)
+
+        # Get all tools from the ArXiv toolkit
+        arxiv_tools = await client.list_tools(toolkit="arxiv")
+        logger.info("ArXiv toolkit tools: %s", arxiv_tools)
+
+        # Combine filters with format
+        openai_search_tools = await client.list_tools(
+            format="openai",
+            tags="search"
+        )
+        logger.info("OpenAI format search tools: %s", openai_search_tools)
 
         # Execute a tool
         result = await client.execute_tool(
@@ -72,10 +88,12 @@ The main client class for interacting with the Mix Tools API.
   - Check the API health status
   - Returns: `{"status": "healthy"}`
 
-- `async list_tools(format: Optional[ToolFormat] = None) -> Dict[str, Any]`
-  - List all available tools
+- `async list_tools(format: Optional[ToolFormat] = None, tags: Optional[Union[str, List[str]]] = None, toolkit: Optional[str] = None) -> Dict[str, Any]`
+  - List available tools with optional filtering
   - Args:
     - `format`: Optional format to return tools in ("default", "openai", "anthropic", "ollama")
+    - `tags`: Optional tag or list of tags to filter tools by. Tools must have all specified tags.
+    - `toolkit`: Optional toolkit name to filter tools by
   - Returns: Dictionary containing list of tools in specified format
 
 - `async execute_tool(tool_name: str, properties: Dict[str, Any]) -> Dict[str, Any]`
