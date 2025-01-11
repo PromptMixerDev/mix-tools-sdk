@@ -19,3 +19,14 @@ build/
 .coverage
 .pytest_cache/
 htmlcov/
+
+# Sphinx documentation
+docs/_build/
+docs/_autosummary/
+docs/_static/
+docs/_templates/
+*.doctree
+*.pickle
+.buildinfo
+objects.inv
+searchindex.js
